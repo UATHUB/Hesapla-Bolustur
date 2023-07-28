@@ -20,7 +20,7 @@ class _ActivityExpensesScreenState extends State<ActivityExpensesScreen> {
   final List<ActivityExpense> registeredExpenses =
       rae.registeredActivityExpenses;
 
-  void _openAddExpenseOverlay() {
+  void _openAddActivityExpenseOverlay() {
     showModalBottomSheet(
       useSafeArea: true,
       isScrollControlled: true,
@@ -73,7 +73,8 @@ class _ActivityExpensesScreenState extends State<ActivityExpensesScreen> {
     rae.registeredActivityExpenses = registeredExpenses;
     Widget mainContent = Scaffold(
       floatingActionButton: FloatingActionButton(
-          onPressed: _openAddExpenseOverlay, child: const Icon(Icons.add)),
+          onPressed: _openAddActivityExpenseOverlay,
+          child: const Icon(Icons.add)),
       body: const Center(
         child: Text(
           'Bölüştürmek İçin İlk Harcamanı Ekle!',
@@ -87,7 +88,8 @@ class _ActivityExpensesScreenState extends State<ActivityExpensesScreen> {
     if (registeredExpenses.isNotEmpty) {
       mainContent = Scaffold(
         floatingActionButton: FloatingActionButton(
-            onPressed: _openAddExpenseOverlay, child: const Icon(Icons.add)),
+            onPressed: _openAddActivityExpenseOverlay,
+            child: const Icon(Icons.add)),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [

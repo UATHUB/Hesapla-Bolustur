@@ -94,10 +94,3 @@ void main() async {
     ),
   );
 }
-
-
-// liste içine sayfaları tanımla
-//selected index ve index tanımla
-// sayfa döndürecek fonksiyon tanımla
-
-//getx dosyasını dağıt

@@ -22,6 +22,17 @@ class PageSelecter extends GetxController {
     /*7*/ BHomeScreen(),
   ];
 
+  void getScreen(int index) {
+    Get.close(1);
+    Get.to(() => setScreen(index),
+        transition: Transition.topLevel,
+        duration: const Duration(milliseconds: 650));
+  }
+
+  Widget setScreen(int index) {
+    return pagesList[index];
+  }
+
   void goToSecondPart() {
     Get.off(
       const BHomeScreen(),
@@ -36,16 +47,5 @@ class PageSelecter extends GetxController {
       transition: Transition.circularReveal,
       duration: const Duration(milliseconds: 600),
     );
-  }
-
-  void getScreen(int index) {
-    Get.close(1);
-    Get.to(() => setScreen(index),
-        transition: Transition.topLevel,
-        duration: const Duration(milliseconds: 650));
-  }
-
-  Widget setScreen(int index) {
-    return pagesList[index];
   }
 }

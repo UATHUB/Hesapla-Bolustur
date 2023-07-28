@@ -21,6 +21,8 @@ ExpenseController e = Get.put(ExpenseController());
 String _selectedCategory = e.expenseCategory.first;
 RegisteredPersonsController rpc = Get.put(RegisteredPersonsController());
 
+List<String> selectedPersons = [];
+
 class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
@@ -82,6 +84,14 @@ class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
     _titleController.dispose();
     _amountController.dispose();
     super.dispose();
+  }
+
+  List<String> getNameList(List<Person> personList) {
+    List<String> returnList = [];
+    for (int i = 0; i < personList.length; i++) {
+      returnList[i] = personList[i].name.toString();
+    }
+    return returnList;
   }
 
   static final formKey = GlobalKey<FormState>();
@@ -189,7 +199,19 @@ class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
                       ),
                     ],
                   ),
-                  // Row(children: [DropDownMultiSelect(options: rpc.personsList, selectedValues: selectedValues, onChanged: onChanged, whenEmpty: whenEmpty)],)
+                  Row(
+                    children: [
+                      DropDownMultiSelect(
+                          options: getNameList(rpc.personsList),
+                          selectedValues: selectedPersons,
+                          onChanged: (person) {
+                            setState(() {
+                              selectedPersons = person;
+                            });
+                          },
+                          whenEmpty: 'Bu Alan Boş Bırakılamaz')
+                    ],
+                  ),
                   const SizedBox(height: 20),
                   Row(
                     children: [

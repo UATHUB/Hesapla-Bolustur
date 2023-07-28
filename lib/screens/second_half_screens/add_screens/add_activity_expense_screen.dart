@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//import 'package:multiselect/multiselect.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:self_test1/controllers/first_half_controllers/expense_categories_controller.dart';
 import 'package:self_test1/controllers/second_half_controllers/registered_persons_controller.dart';
 import 'package:self_test1/main.dart';
@@ -21,7 +21,7 @@ ExpenseController e = Get.put(ExpenseController());
 String _selectedCategory = e.expenseCategory.first;
 RegisteredPersonsController rpc = Get.put(RegisteredPersonsController());
 
-List<String> selectedPersons = [];
+List<dynamic> selectedPersons = [];
 
 class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
   final _titleController = TextEditingController();
@@ -199,18 +199,69 @@ class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      // DropDownMultiSelect(
-                      //     options: getNameList(rpc.personsList),
-                      //     selectedValues: selectedPersons,
-                      //     onChanged: (person) {
-                      //       setState(() {
-                      //         selectedPersons = person;
-                      //       });
-                      //     },
-                      //     whenEmpty: 'Bu Alan Boş Bırakılamaz')
-                    ],
+                  const SizedBox(height: 10),
+                  MultiSelectDialogField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Bu alan boş bırakılamaz';
+                      }
+                      return null;
+                    },
+                    isDismissible: true,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
+                    itemsTextStyle: const TextStyle().copyWith(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
+                    unselectedColor: Theme.of(context)
+                        .colorScheme
+                        .errorContainer
+                        .withOpacity(0.25),
+                    barrierColor: Colors.transparent.withAlpha(175),
+                    checkColor: Theme.of(context)
+                        .colorScheme
+                        .tertiaryContainer
+                        .withOpacity(0.75),
+                    selectedColor: Theme.of(context)
+                        .colorScheme
+                        .tertiaryContainer
+                        .withOpacity(0.25),
+                    chipDisplay: MultiSelectChipDisplay(
+                        textStyle: const TextStyle().copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer),
+                        chipColor:
+                            Theme.of(context).colorScheme.secondaryContainer),
+                    selectedItemsTextStyle: const TextStyle().copyWith(
+                        color:
+                            Theme.of(context).colorScheme.onTertiaryContainer),
+                    buttonIcon: const Icon(Icons.arrow_drop_down),
+                    buttonText: Text(
+                      'Harcamaya Dahil Olan Kişileri Seçiniz',
+                      style: const TextStyle().copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer),
+                    ),
+                    confirmText: const Text('Kişileri Onayla'),
+                    cancelText: const Text('İptal'),
+                    separateSelectedItems: true,
+                    listType: MultiSelectListType.CHIP,
+                    title: Text(
+                      'Kişileri Seçiniz',
+                      style: const TextStyle().copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer),
+                      textAlign: TextAlign.center,
+                    ),
+                    items: rpc.personsList
+                        .map((e) => MultiSelectItem(e.id, e.name))
+                        .toList(),
+                    onConfirm: (values) {
+                      selectedPersons = values;
+                    },
                   ),
                   const SizedBox(height: 20),
                   Row(

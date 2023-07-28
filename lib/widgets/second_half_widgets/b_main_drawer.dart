@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:self_test1/controllers/first_half_controllers/page_controller.dart';
+import 'package:self_test1/screens/second_half_screens/add_screens/add_person_screen.dart';
 
 class SecondDrawer extends StatelessWidget {
   const SecondDrawer({
@@ -67,6 +68,23 @@ class SecondDrawer extends StatelessWidget {
             },
           ),
           const Spacer(),
+          ListTile(
+            leading: Icon(
+              Icons.auto_graph_outlined,
+              size: 30,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'Birikim Hedeflerini Yönet',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 18,
+                  ),
+            ),
+            onTap: () {
+              Get.dialog(const AddPersonScreen());
+            },
+          ),
         ],
       ),
     );

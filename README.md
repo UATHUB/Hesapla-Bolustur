@@ -1,16 +1,7 @@
-# self_test1
+# Hesapla//Bölüştür
 
-A new Flutter project.
+Internship Project
 
-## Getting Started
+## App Content
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This project is about tracking users' expenses and their incomes so they can see how much they're spending on what and how much they gain from what. The app also allows users to add and delete custom categories so they can track easier their money cycle. 

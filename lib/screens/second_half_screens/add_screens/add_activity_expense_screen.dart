@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multiselect/multiselect.dart';
+//import 'package:multiselect/multiselect.dart';
 import 'package:self_test1/controllers/first_half_controllers/expense_categories_controller.dart';
 import 'package:self_test1/controllers/second_half_controllers/registered_persons_controller.dart';
 import 'package:self_test1/main.dart';
@@ -201,15 +201,15 @@ class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
                   ),
                   Row(
                     children: [
-                      DropDownMultiSelect(
-                          options: getNameList(rpc.personsList),
-                          selectedValues: selectedPersons,
-                          onChanged: (person) {
-                            setState(() {
-                              selectedPersons = person;
-                            });
-                          },
-                          whenEmpty: 'Bu Alan Boş Bırakılamaz')
+                      // DropDownMultiSelect(
+                      //     options: getNameList(rpc.personsList),
+                      //     selectedValues: selectedPersons,
+                      //     onChanged: (person) {
+                      //       setState(() {
+                      //         selectedPersons = person;
+                      //       });
+                      //     },
+                      //     whenEmpty: 'Bu Alan Boş Bırakılamaz')
                     ],
                   ),
                   const SizedBox(height: 20),

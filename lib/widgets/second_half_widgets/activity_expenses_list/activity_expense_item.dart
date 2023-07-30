@@ -52,7 +52,6 @@ class ActivityExpenseItem extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const Spacer(),
           ],
         ),
       ),

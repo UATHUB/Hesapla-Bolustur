@@ -5,8 +5,10 @@ import 'package:self_test1/controllers/first_half_controllers/expenses_list_cont
 import 'package:self_test1/controllers/first_half_controllers/income_categories_controller.dart';
 import 'package:self_test1/controllers/first_half_controllers/incomes_list_controller.dart';
 import 'package:self_test1/controllers/first_half_controllers/page_controller.dart';
+import 'package:self_test1/controllers/second_half_controllers/activity_expense_list_controller.dart';
 import 'package:self_test1/models/first_half_models/expense.dart';
 import 'package:self_test1/models/first_half_models/income.dart';
+import 'package:self_test1/models/second_half_models/expense.dart';
 import 'package:self_test1/widgets/first_half_widgets/main_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,6 +32,11 @@ class _HomeScreenState extends State<HomeScreen>
     RegisteredIncomesController ri = Get.put(RegisteredIncomesController());
     List<Income> registeredIncomes = ri.getAllIncomes();
     ri.registeredIncomes = registeredIncomes;
+    //
+    RegisteredActivityExpensesController rae =
+        Get.put(RegisteredActivityExpensesController());
+    List<ActivityExpense> previousList = rae.getAllExpenses();
+    rae.registeredActivityExpenses = previousList;
   }
 
   late TabController _tabController;

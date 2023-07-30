@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:self_test1/controllers/second_half_controllers/activity_expense_list_controller.dart';
+import 'package:self_test1/models/second_half_models/expense.dart';
 import 'package:self_test1/screens/second_half_screens/b_home_screen.dart';
 import 'package:self_test1/screens/first_half_screens/drawer_screens/customize_expense_categories_screen.dart';
 import 'package:self_test1/screens/first_half_screens/drawer_screens/customize_income_categories_screen.dart';
@@ -34,7 +36,11 @@ class PageSelecter extends GetxController {
   }
 
   void goToSecondPart() {
-    Get.off(
+    RegisteredActivityExpensesController rae =
+        Get.put(RegisteredActivityExpensesController());
+    List<ActivityExpense> previousList = rae.getAllExpenses();
+    rae.registeredActivityExpenses = previousList;
+    Get.to(
       const BHomeScreen(),
       transition: Transition.circularReveal,
       duration: const Duration(milliseconds: 600),
@@ -42,7 +48,7 @@ class PageSelecter extends GetxController {
   }
 
   void goToFirstPart() {
-    Get.off(
+    Get.to(
       const HomeScreen(),
       transition: Transition.circularReveal,
       duration: const Duration(milliseconds: 600),

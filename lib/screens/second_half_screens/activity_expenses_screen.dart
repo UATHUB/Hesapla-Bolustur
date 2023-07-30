@@ -90,16 +90,8 @@ class _ActivityExpensesScreenState extends State<ActivityExpensesScreen> {
         floatingActionButton: FloatingActionButton(
             onPressed: _openAddActivityExpenseOverlay,
             child: const Icon(Icons.add)),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            const SizedBox(height: 30),
-            Expanded(
-              child: ActivityExpensesList(
-                onRemoveExpense: _removeExpense,
-              ),
-            ),
-          ],
+        body: ActivityExpensesList(
+          onRemoveExpense: _removeExpense,
         ),
       );
     }

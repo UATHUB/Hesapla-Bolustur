@@ -6,7 +6,7 @@ final registeredPersonsBox = GetStorage('RegisteredPersons');
 
 class RegisteredPersonsController extends GetxController {
   List<Person> personsList = [
-    Person(name: 'ayşe', includedExpenses: [], totalAmount: 31)
+    Person(name: 'ayşe', includedExpenses: [], totalAmount: 20)
   ];
 
   void savePersons(List<Person> persons) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:self_test1/screens/second_half_screens/activity_expenses_screen.dart';
+import 'package:self_test1/screens/second_half_screens/activity_summary_screen.dart';
 import 'package:self_test1/widgets/second_half_widgets/b_main_drawer.dart';
 
 class BHomeScreen extends StatefulWidget {
@@ -59,9 +60,9 @@ class _BHomeScreenState extends State<BHomeScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [
-          ActivityExpensesScreen(),
-          Text('özet görüntüleme'),
+        children: [
+          const ActivityExpensesScreen(),
+          ActivitySummaryScreen(),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:self_test1/controllers/first_half_controllers/expense_categories_controller.dart';
+import 'package:self_test1/controllers/second_half_controllers/activity_expense_list_controller.dart';
 import 'package:self_test1/controllers/second_half_controllers/registered_persons_controller.dart';
 import 'package:self_test1/main.dart';
 import 'package:self_test1/models/second_half_models/expense.dart';
@@ -20,8 +21,10 @@ class AddActivityExpenseScreen extends StatefulWidget {
 ExpenseController e = Get.put(ExpenseController());
 String _selectedCategory = e.expenseCategory.first;
 RegisteredPersonsController rpc = Get.put(RegisteredPersonsController());
+RegisteredActivityExpensesController rae =
+    Get.put(RegisteredActivityExpensesController());
 
-List<dynamic> selectedPersons = [];
+List<Person> selectedPeopleList = [];
 
 class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
   final _titleController = TextEditingController();
@@ -69,11 +72,12 @@ class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
       _showDialog();
       return;
     }
+    rae.divideExpense(sharers, enteredAmount, _titleController.text);
     widget.onAddExpense(
       ActivityExpense(
           name: _titleController.text,
           amount: enteredAmount,
-          sharers: sharers,
+          sharers: selectedPeopleList,
           category: _selectedCategory),
     );
     Navigator.pop(context);
@@ -260,7 +264,10 @@ class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
                         .map((e) => MultiSelectItem(e.id, e.name))
                         .toList(),
                     onConfirm: (values) {
-                      selectedPersons = values;
+                      selectedPeopleList = values.map((id) {
+                        return rpc.personsList
+                            .firstWhere((person) => person.id == id);
+                      }).toList();
                     },
                   ),
                   const SizedBox(height: 20),

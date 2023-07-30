@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:self_test1/models/second_half_models/expense.dart';
+import 'package:self_test1/models/second_half_models/persons.dart';
 
 final activityExpensesListBox = GetStorage('activityExpensesList');
 
@@ -12,7 +13,9 @@ class RegisteredActivityExpensesController extends GetxController {
       return {
         'name': expense.name,
         'amount': expense.amount,
-        'sharers': expense.sharers,
+        'sharers': expense.sharers
+            .map((person) => person.toJson())
+            .toList(), // Use toJson here
         'category': expense.category,
       };
     }).toList();
@@ -27,10 +30,16 @@ class RegisteredActivityExpensesController extends GetxController {
 
     if (dataList != null) {
       for (final data in dataList) {
+        final List<dynamic> sharersList = data['sharers'];
+
+        final List<Person> sharers = sharersList.map((sharer) {
+          return Person.fromJson(sharer); // Use fromJson here
+        }).toList();
+
         expenses.add(ActivityExpense(
           name: data['name'],
           amount: data['amount'],
-          sharers: data['sharers'],
+          sharers: sharers,
           category: data['category'],
         ));
       }
@@ -50,6 +59,15 @@ class RegisteredActivityExpensesController extends GetxController {
     if (dataList != null) {
       dataList.removeWhere((data) => data['id'] == expenseId);
       activityExpensesListBox.write('ExpensesList', dataList);
+    }
+  }
+
+  void divideExpense(List<Person> sharers, double amount, String name) {
+    double partOfEach = amount / sharers.length;
+
+    for (var person in sharers) {
+      person.totalAmount += partOfEach;
+      person.includedExpenses.add(name);
     }
   }
 }

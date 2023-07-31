@@ -1,10 +1,10 @@
-import 'package:self_test1/models/second_half_models/expense.dart';
 import 'package:flutter/material.dart';
+import 'package:self_test1/models/second_half_models/persons.dart';
 
-class ActivityExpenseItem extends StatelessWidget {
-  const ActivityExpenseItem(this.expense, {super.key});
+class SummaryScreenItem extends StatelessWidget {
+  const SummaryScreenItem(this.person, {super.key});
 
-  final ActivityExpense expense;
+  final Person person;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ActivityExpenseItem extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  expense.name,
+                  person.name,
                   style: const TextStyle().copyWith(
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
                     fontSize: 16,
@@ -30,10 +30,7 @@ class ActivityExpenseItem extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  expense.category.replaceFirst(
-                    expense.category.characters.first,
-                    expense.category.characters.first.toUpperCase(),
-                  ),
+                  person.totalAmount.toStringAsFixed(2),
                   style: const TextStyle().copyWith(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -41,16 +38,6 @@ class ActivityExpenseItem extends StatelessWidget {
                           Theme.of(context).colorScheme.onSecondaryContainer),
                 ),
               ],
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            Text(
-              '${expense.amount.toStringAsFixed(2)} ₺',
-              style: const TextStyle().copyWith(
-                color: Theme.of(context).colorScheme.onSecondaryContainer,
-                fontWeight: FontWeight.w500,
-              ),
             ),
           ],
         ),

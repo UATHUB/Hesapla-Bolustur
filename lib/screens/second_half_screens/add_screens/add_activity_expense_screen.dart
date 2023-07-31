@@ -65,6 +65,37 @@ class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
     );
   }
 
+  void _showTitleDialog() {
+    Get.dialog(
+      AlertDialog(
+        actionsAlignment: MainAxisAlignment.center,
+        backgroundColor: Theme.of(context).colorScheme.errorContainer,
+        title: Text(
+          'Geçersiz Giriş',
+          style: const TextStyle().copyWith(
+              color: Theme.of(context).colorScheme.onSecondaryContainer),
+        ),
+        content: Text(
+          'Aynı İsimde Birden Fazla Harcama Girilemez',
+          style: const TextStyle().copyWith(
+              color: Theme.of(context).colorScheme.onSecondaryContainer),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.close(1);
+            },
+            child: Text(
+              'Tamam',
+              style: const TextStyle().copyWith(
+                  color: Theme.of(context).colorScheme.onErrorContainer),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _submitExpense() {
     final enteredAmount = double.tryParse(_amountController.text);
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
@@ -72,7 +103,13 @@ class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
       _showDialog();
       return;
     }
-    rae.divideExpense(sharers, enteredAmount, _titleController.text);
+    for (var expense in rae.registeredActivityExpenses) {
+      if (expense.name == _titleController.text) {
+        _showTitleDialog();
+        return;
+      }
+    }
+
     widget.onAddExpense(
       ActivityExpense(
           name: _titleController.text,

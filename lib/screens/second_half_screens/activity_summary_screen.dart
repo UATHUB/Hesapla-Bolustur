@@ -4,15 +4,15 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:self_test1/controllers/second_half_controllers/activity_expense_list_controller.dart';
 import 'package:self_test1/controllers/second_half_controllers/registered_persons_controller.dart';
 import 'package:self_test1/models/second_half_models/expense.dart';
+import 'package:self_test1/widgets/second_half_widgets/summary_screen_list/summary_screen_list.dart';
 
 final RegisteredActivityExpensesController rae =
     Get.put(RegisteredActivityExpensesController());
 final RegisteredPersonsController rpc = Get.put(RegisteredPersonsController());
 
 class ActivitySummaryScreen extends StatelessWidget {
-  ActivitySummaryScreen({super.key});
+  const ActivitySummaryScreen({super.key});
 
-  final totalExpense = rpc.personsList[0].totalAmount.toString().obs;
   Map<String, double> getMap(List<ActivityExpense> expenses) {
     Map<String, double> returnMap = {};
     for (var expense in expenses) {
@@ -24,20 +24,24 @@ class ActivitySummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        PieChart(dataMap: getMap(rae.registeredActivityExpenses)),
-        Obx(
-          () => Card(
-            child: Row(
-              children: [
-                Text(rpc.personsList[0].name),
-                Text(totalExpense.value),
-              ],
-            ),
-          ),
+    Widget mainContent = const Center(
+      child: Text(
+        'Bölüştürmek İçin İlk Harcamanı Ekle!',
+        style: TextStyle(
+          color: Color.fromARGB(85, 67, 173, 187),
         ),
-      ],
+      ),
     );
+
+    if (rae.registeredActivityExpenses.isNotEmpty) {
+      mainContent = Column(
+        children: [
+          PieChart(dataMap: getMap(rae.registeredActivityExpenses)),
+          const Expanded(child: SummaryScreenList()),
+        ],
+      );
+    }
+
+    return mainContent;
   }
 }

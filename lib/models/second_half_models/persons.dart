@@ -14,7 +14,7 @@ import 'package:uuid/uuid.dart';
 class Person {
   final id = const Uuid().v4();
   final String name;
-  final List<dynamic> includedExpenses;
+  final List<String> includedExpenses;
   double totalAmount;
 
   Person({
@@ -34,7 +34,7 @@ class Person {
   factory Person.fromJson(Map<String, dynamic> json) {
     return Person(
       name: json['name'],
-      includedExpenses: json['includedExpenses'],
+      includedExpenses: List<String>.from(json['includedExpenses']),
       totalAmount: json['totalAmount'],
     );
   }

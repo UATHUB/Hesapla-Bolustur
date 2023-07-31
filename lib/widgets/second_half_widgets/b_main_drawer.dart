@@ -85,6 +85,23 @@ class SecondDrawer extends StatelessWidget {
               Get.dialog(const AddPersonScreen());
             },
           ),
+          ListTile(
+            leading: Icon(
+              Icons.groups_2_rounded,
+              size: 30,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'Kişileri Düzenle',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 18,
+                  ),
+            ),
+            onTap: () {
+              pc.getScreen(8);
+            },
+          ),
         ],
       ),
     );

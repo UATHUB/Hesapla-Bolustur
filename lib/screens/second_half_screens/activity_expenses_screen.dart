@@ -48,13 +48,14 @@ class _ActivityExpensesScreenState extends State<ActivityExpensesScreen> {
     Get.snackbar('Başarılı', 'Harcama Silindi',
         snackPosition: SnackPosition.TOP,
         mainButton: TextButton(
-          child: const Text('Geri Al'),
-          onPressed: () => setState(() {
-            Get.closeAllSnackbars();
-            registeredExpenses.insert(expenseIndex, expense);
-            rae.saveExpenses(registeredExpenses);
-          }),
-        ));
+            child: const Text('Geri Al'),
+            onPressed: () {
+              Get.closeAllSnackbars();
+              registeredExpenses.insert(expenseIndex, expense);
+              rae.saveExpenses(registeredExpenses);
+              rae.divideExpenses();
+              setState(() {});
+            }));
   }
 
   Map<String, double> mapRegisteredActivityExpenses(
@@ -90,8 +91,11 @@ class _ActivityExpensesScreenState extends State<ActivityExpensesScreen> {
         floatingActionButton: FloatingActionButton(
             onPressed: _openAddActivityExpenseOverlay,
             child: const Icon(Icons.add)),
-        body: ActivityExpensesList(
-          onRemoveExpense: _removeExpense,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: ActivityExpensesList(
+            onRemoveExpense: _removeExpense,
+          ),
         ),
       );
     }

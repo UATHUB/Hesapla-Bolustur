@@ -6,14 +6,14 @@ final registeredPersonsBox = GetStorage('RegisteredPersons');
 
 class RegisteredPersonsController extends GetxController {
   List<Person> personsList = [
-    Person(name: 'ayşe', includedExpenses: [], totalAmount: 20)
+    Person(name: 'ayşe', includedExpenses: [], totalAmount: 0)
   ];
 
   void savePersons(List<Person> persons) {
     final List<Map<String, dynamic>> dataList = persons.map((person) {
       return {
         'name': person.name,
-        'includedExpenses': person.includedExpenses,
+        'includedExpenses': person.includedExpenses.toList(),
         'totalAmount': person.totalAmount,
       };
     }).toList();
@@ -28,10 +28,7 @@ class RegisteredPersonsController extends GetxController {
 
     if (dataList != null) {
       for (final data in dataList) {
-        persons.add(Person(
-            name: data['name'],
-            includedExpenses: data['includedExpenses'],
-            totalAmount: data['totalAmount']));
+        persons.add(Person.fromJson(data));
       }
     }
     return persons;
@@ -39,5 +36,18 @@ class RegisteredPersonsController extends GetxController {
 
   void removeAllExpenses() {
     registeredPersonsBox.remove('ExpensesList');
+  }
+
+  void resetAllData() {
+    for (var person in personsList) {
+      for (var element in person.includedExpenses) {
+        print(element);
+      }
+      person.includedExpenses.clear();
+      for (var element in person.includedExpenses) {
+        print(element);
+      }
+      person.totalAmount = 0;
+    }
   }
 }

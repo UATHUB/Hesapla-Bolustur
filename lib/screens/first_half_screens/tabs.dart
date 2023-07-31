@@ -6,6 +6,7 @@ import 'package:self_test1/controllers/first_half_controllers/income_categories_
 import 'package:self_test1/controllers/first_half_controllers/incomes_list_controller.dart';
 import 'package:self_test1/controllers/first_half_controllers/page_controller.dart';
 import 'package:self_test1/controllers/second_half_controllers/activity_expense_list_controller.dart';
+import 'package:self_test1/controllers/second_half_controllers/registered_persons_controller.dart';
 import 'package:self_test1/models/first_half_models/expense.dart';
 import 'package:self_test1/models/first_half_models/income.dart';
 import 'package:self_test1/models/second_half_models/expense.dart';
@@ -37,6 +38,8 @@ class _HomeScreenState extends State<HomeScreen>
         Get.put(RegisteredActivityExpensesController());
     List<ActivityExpense> previousList = rae.getAllExpenses();
     rae.registeredActivityExpenses = previousList;
+    RegisteredPersonsController rpc = Get.put(RegisteredPersonsController());
+    rpc.getAllPersons();
   }
 
   late TabController _tabController;

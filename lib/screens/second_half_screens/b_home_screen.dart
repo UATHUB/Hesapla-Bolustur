@@ -36,7 +36,9 @@ class _BHomeScreenState extends State<BHomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        toolbarHeight: double.minPositive,
+      ),
       endDrawer: const SecondDrawer(),
       bottomNavigationBar: Material(
         color: Theme.of(context).colorScheme.secondaryContainer,
@@ -60,8 +62,8 @@ class _BHomeScreenState extends State<BHomeScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          const ActivityExpensesScreen(),
+        children: const [
+          ActivityExpensesScreen(),
           ActivitySummaryScreen(),
         ],
       ),

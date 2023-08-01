@@ -68,28 +68,31 @@ class MainDrawer extends StatelessWidget {
           ),
           const Spacer(),
           Container(
-              height: 50,
-              width: double.infinity,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).colorScheme.secondaryContainer,
-                    Theme.of(context)
-                        .colorScheme
-                        .secondaryContainer
-                        .withOpacity(0.75),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+            height: 50,
+            width: double.infinity,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.secondaryContainer,
+                  Theme.of(context)
+                      .colorScheme
+                      .secondaryContainer
+                      .withOpacity(0.75),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              child: Text('Hedefler',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        fontSize: 20,
-                      ))),
+            ),
+            child: Text(
+              'Hedefler',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 20,
+                  ),
+            ),
+          ),
           const SizedBox(height: 30),
           ListTile(
             leading: Icon(
@@ -98,7 +101,7 @@ class MainDrawer extends StatelessWidget {
               color: Theme.of(context).colorScheme.onBackground,
             ),
             title: Text(
-              'Birikim Hedeflerini Yönet',
+              'Birikim Hedeflerini Yönet (W.I.P.)',
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                     fontSize: 18,
@@ -108,7 +111,7 @@ class MainDrawer extends StatelessWidget {
               pc.getScreen(6);
             },
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           ListTile(
             leading: Icon(
               Icons.settings,
@@ -116,7 +119,7 @@ class MainDrawer extends StatelessWidget {
               color: Theme.of(context).colorScheme.onBackground,
             ),
             title: Text(
-              'Harcama Hedeflerini Yönet',
+              'Harcama Hedeflerini Yönet (W.I.P.)',
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                     fontSize: 18,
@@ -128,28 +131,31 @@ class MainDrawer extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           Container(
-              height: 50,
-              width: double.infinity,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).colorScheme.secondaryContainer,
-                    Theme.of(context)
-                        .colorScheme
-                        .secondaryContainer
-                        .withOpacity(0.75),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+            height: 50,
+            width: double.infinity,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.secondaryContainer,
+                  Theme.of(context)
+                      .colorScheme
+                      .secondaryContainer
+                      .withOpacity(0.75),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              child: Text('Kategori Ayarları',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        fontSize: 20,
-                      ))),
+            ),
+            child: Text(
+              'Kategori Ayarları',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 20,
+                  ),
+            ),
+          ),
           const SizedBox(height: 30),
           ListTile(
             leading: Icon(
@@ -168,7 +174,7 @@ class MainDrawer extends StatelessWidget {
               pc.getScreen(3);
             },
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           ListTile(
             leading: Icon(
               Icons.settings,
@@ -187,6 +193,28 @@ class MainDrawer extends StatelessWidget {
             },
           ),
           const SizedBox(height: 30),
+          Container(
+            height: 65,
+            width: double.infinity,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.secondaryContainer,
+                  Theme.of(context)
+                      .colorScheme
+                      .secondaryContainer
+                      .withOpacity(0.75),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_circle_right_outlined, size: 55),
+              onPressed: () => Get.close(1),
+            ),
+          ),
         ],
       ),
     );

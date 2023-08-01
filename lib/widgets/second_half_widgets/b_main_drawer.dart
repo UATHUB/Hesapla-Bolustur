@@ -32,7 +32,7 @@ class SecondDrawer extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  Icons.money_sharp,
+                  Icons.safety_divider_rounded,
                   size: 48,
                   color: Theme.of(context).colorScheme.onSecondaryContainer,
                 ),
@@ -51,7 +51,7 @@ class SecondDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
-              Icons.safety_divider_rounded,
+              Icons.money,
               size: 30,
               color: Theme.of(context).colorScheme.onBackground,
             ),
@@ -67,23 +67,96 @@ class SecondDrawer extends StatelessWidget {
             },
           ),
           const Spacer(),
-          // ListTile(
-          //   leading: Icon(
-          //     Icons.auto_graph_outlined,
-          //     size: 30,
-          //     color: Theme.of(context).colorScheme.onBackground,
-          //   ),
-          //   title: Text(
-          //     'Birikim Hedeflerini Yönet',
-          //     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-          //           color: Theme.of(context).colorScheme.onBackground,
-          //           fontSize: 18,
-          //         ),
-          //   ),
-          //   onTap: () {
-          //     Get.dialog(const AddPersonScreen());
-          //   },
-          // ),
+          Container(
+            height: 50,
+            width: double.infinity,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.secondaryContainer,
+                  Theme.of(context)
+                      .colorScheme
+                      .secondaryContainer
+                      .withOpacity(0.75),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Text(
+              'Etkinlikler',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 20,
+                  ),
+            ),
+          ),
+          const SizedBox(height: 30),
+          ListTile(
+            leading: Icon(
+              Icons.save_as,
+              size: 30,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'Mevcut Etkinliği Kaydet (W.I.P.)',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 18,
+                  ),
+            ),
+            onTap: () {
+              //TODO
+            },
+          ),
+          const SizedBox(height: 20),
+          ListTile(
+            leading: Icon(
+              Icons.local_activity,
+              size: 30,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'Kayıtlı Etkinlikleri Görüntüle (W.I.P.)',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 18,
+                  ),
+            ),
+            onTap: () {
+              //TODO
+            },
+          ),
+          const SizedBox(height: 25),
+          Container(
+            height: 50,
+            width: double.infinity,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.secondaryContainer,
+                  Theme.of(context)
+                      .colorScheme
+                      .secondaryContainer
+                      .withOpacity(0.75),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Text(
+              'Kişiler//Gruplar',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 20,
+                  ),
+            ),
+          ),
+          const SizedBox(height: 30),
           ListTile(
             leading: Icon(
               Icons.groups_2_rounded,
@@ -101,7 +174,47 @@ class SecondDrawer extends StatelessWidget {
               pc.getScreen(8);
             },
           ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 20),
+          ListTile(
+            leading: Icon(
+              Icons.workspace_premium,
+              size: 30,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'Kayıtlı Grupları Görüntüle (W.I.P.)',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 18,
+                  ),
+            ),
+            onTap: () {
+              //TODO
+            },
+          ),
+          const SizedBox(height: 30),
+          Container(
+            height: 65,
+            width: double.infinity,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.secondaryContainer,
+                  Theme.of(context)
+                      .colorScheme
+                      .secondaryContainer
+                      .withOpacity(0.75),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_circle_right_outlined, size: 55),
+              onPressed: () => Get.close(1),
+            ),
+          ),
         ],
       ),
     );

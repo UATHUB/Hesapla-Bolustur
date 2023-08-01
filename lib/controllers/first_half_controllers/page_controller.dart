@@ -51,9 +51,6 @@ class PageSelecter extends GetxController {
     List<Person> previousPeople = rpc.getAllPersons();
     rae.registeredActivityExpenses = previousList;
     rpc.personsList = previousPeople;
-    for (var element in previousList) {
-      print(element.name);
-    }
   }
 
   void goToFirstPart() {

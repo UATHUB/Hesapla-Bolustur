@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:self_test1/controllers/first_half_controllers/expense_categories_controller.dart';
 import 'package:self_test1/controllers/first_half_controllers/expenses_list_controller.dart';
+import 'package:self_test1/controllers/first_half_controllers/income_categories_controller.dart';
 import 'package:self_test1/controllers/first_half_controllers/incomes_list_controller.dart';
 import 'package:self_test1/screens/first_half_screens/tabs.dart';
 
@@ -20,14 +22,22 @@ final kLightColorScheme = ColorScheme.fromSeed(
 void main() async {
   RegisteredExpensesController re;
   RegisteredIncomesController ri;
+  ExpenseController e;
+  IncomeController i;
 
+  e = Get.put(ExpenseController());
+  i = Get.put(IncomeController());
   re = Get.put(RegisteredExpensesController());
   ri = Get.put(RegisteredIncomesController());
+
   final previousExpensesList = re.getAllExpenses();
   final previousIncomesList = ri.getAllIncomes();
+  e.readExpenseCategory();
+  i.readIncomeCategory();
+
   re.registeredExpenses = previousExpensesList;
   ri.registeredIncomes = previousIncomesList;
-  Future.delayed(const Duration(seconds: 1));
+
   await GetStorage.init('storage');
   WidgetsFlutterBinding.ensureInitialized();
   runApp(

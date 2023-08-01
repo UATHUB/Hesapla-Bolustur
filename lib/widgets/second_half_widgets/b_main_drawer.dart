@@ -211,7 +211,7 @@ class SecondDrawer extends StatelessWidget {
               ),
             ),
             child: IconButton(
-              icon: const Icon(Icons.arrow_circle_right_outlined, size: 55),
+              icon: const Icon(Icons.arrow_forward_ios_rounded, size: 45),
               onPressed: () => Get.close(1),
             ),
           ),

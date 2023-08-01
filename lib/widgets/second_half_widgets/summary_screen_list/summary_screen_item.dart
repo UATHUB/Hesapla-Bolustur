@@ -9,6 +9,7 @@ class SummaryScreenItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 5,
       color: Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.8),
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -16,28 +17,25 @@ class SummaryScreenItem extends StatelessWidget {
           vertical: 16,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                Text(
-                  person.name,
-                  style: const TextStyle().copyWith(
-                    color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  person.totalAmount.toStringAsFixed(2),
-                  style: const TextStyle().copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color:
-                          Theme.of(context).colorScheme.onSecondaryContainer),
-                ),
-              ],
+            Text(
+              person.name.replaceFirst(person.name.characters.first,
+                  person.name.characters.first.toUpperCase()),
+              style: const TextStyle().copyWith(
+                color: Theme.of(context).colorScheme.onSecondaryContainer,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const Spacer(),
+            Text(
+              '${person.totalAmount.toStringAsFixed(2)}₺',
+              style: const TextStyle().copyWith(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).colorScheme.onSecondaryContainer),
             ),
           ],
         ),

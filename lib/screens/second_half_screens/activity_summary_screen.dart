@@ -36,8 +36,43 @@ class ActivitySummaryScreen extends StatelessWidget {
     if (rae.registeredActivityExpenses.isNotEmpty) {
       mainContent = Column(
         children: [
-          PieChart(dataMap: getMap(rae.registeredActivityExpenses)),
-          const Expanded(child: SummaryScreenList()),
+          PieChart(
+            chartRadius: 250,
+            chartValuesOptions: ChartValuesOptions(
+                showChartValueBackground: false,
+                chartValueStyle: const TextStyle().copyWith(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    fontWeight: FontWeight.w600)),
+            dataMap: getMap(rae.registeredActivityExpenses),
+            chartLegendSpacing: 10,
+            legendOptions: LegendOptions(
+              legendPosition: LegendPosition.bottom,
+              showLegendsInRow: true,
+              legendTextStyle: const TextStyle().copyWith(
+                  color: Theme.of(context).colorScheme.onSecondaryContainer,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondaryContainer),
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                'Kişi Özetleri',
+                style: const TextStyle().copyWith(
+                    color: Theme.of(context).colorScheme.onSecondaryContainer,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          const Expanded(
+            child: SummaryScreenList(),
+          ),
         ],
       );
     }

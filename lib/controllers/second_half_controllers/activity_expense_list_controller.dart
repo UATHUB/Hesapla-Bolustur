@@ -71,44 +71,16 @@ class RegisteredActivityExpensesController extends GetxController {
     rpc.resetAllData();
 
     for (var currentExpense in allExpenses) {
-      print(currentExpense.name);
       double partOfEach = 0;
       partOfEach = currentExpense.amount / currentExpense.sharers.length;
-      print('Harcamaların kaç kişi tarafından bölüşüldüğü:');
-      print(currentExpense.sharers.length);
       for (var person in currentExpense.sharers) {
         Person? existingPerson =
             rpc.personsList.firstWhereOrNull((p) => p.name == person.name);
         if (existingPerson != null) {
           existingPerson.includedExpenses.add(currentExpense.name);
           existingPerson.totalAmount += partOfEach;
-        } else {
-          print('kişi eşleşmedi');
-        }
-        print(
-            '${currentExpense.name} harcaması ${person.name} kişisine eklenmiş olmalı...');
-        print('_____________');
+        } else {}
       }
-    }
-    print('TÜM KAYITLI HARCAMALAR:');
-    for (var element in rae.registeredActivityExpenses) {
-      print(element.name);
-    }
-    print('KİŞİLERİN HARCAMALARI:');
-    for (var person in rpc.personsList) {
-      print(person.name);
-      print(person.includedExpenses);
-      print('__________');
-    }
-    print('Harcamaları Paylaşanlar');
-    for (var element in rae.registeredActivityExpenses) {
-      print(element.name);
-
-      for (var i = 0; i < element.sharers.length; i++) {
-        print(element.sharers[i].name);
-      }
-      print(element.amount.toString());
-      print('__________');
     }
   }
 }

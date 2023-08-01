@@ -24,7 +24,14 @@ class _SummaryScreenListState extends State<SummaryScreenList> {
       rae.divideExpenses();
     });
     List<Person> persons = rpc.personsList;
-    return ListView.builder(
+    return GridView.builder(
+      shrinkWrap: true,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 1.15,
+        crossAxisCount: 2, // Number of columns in the grid
+        crossAxisSpacing: 30, // Spacing between columns
+        mainAxisSpacing: 10, // Spacing between rows
+      ),
       itemCount: persons.length,
       itemBuilder: (ctx, index) {
         return SummaryScreenItem(persons[index]);

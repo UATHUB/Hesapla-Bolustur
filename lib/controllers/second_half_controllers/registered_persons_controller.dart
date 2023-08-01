@@ -40,13 +40,7 @@ class RegisteredPersonsController extends GetxController {
 
   void resetAllData() {
     for (var person in personsList) {
-      for (var element in person.includedExpenses) {
-        print(element);
-      }
       person.includedExpenses.clear();
-      for (var element in person.includedExpenses) {
-        print(element);
-      }
       person.totalAmount = 0;
     }
   }

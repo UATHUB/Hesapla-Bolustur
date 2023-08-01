@@ -21,7 +21,8 @@ class ActivityExpenseItem extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  expense.name,
+                  expense.name.replaceFirst(expense.name.characters.first,
+                      expense.name.characters.first.toUpperCase()),
                   style: const TextStyle().copyWith(
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
                     fontSize: 16,
@@ -45,12 +46,41 @@ class ActivityExpenseItem extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            Text(
-              '${expense.amount.toStringAsFixed(2)} ₺',
-              style: const TextStyle().copyWith(
-                color: Theme.of(context).colorScheme.onSecondaryContainer,
-                fontWeight: FontWeight.w500,
-              ),
+            Row(
+              children: [
+                Text(
+                  '${expense.amount.toStringAsFixed(2)} ₺',
+                  style: const TextStyle().copyWith(
+                    color: Theme.of(context).colorScheme.onSecondaryContainer,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const Spacer(),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 60,
+                    height: 15,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: expense.sharers.length,
+                      itemBuilder: (context, index) {
+                        return Text(
+                          '${expense.sharers[index].name.replaceFirst(expense.sharers[index].name.characters.first, expense.sharers[index].name.characters.first.toUpperCase())}  ',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

@@ -298,7 +298,10 @@ class _AddActivityExpenseScreenState extends State<AddActivityExpenseScreen> {
                       textAlign: TextAlign.center,
                     ),
                     items: rpc.personsList
-                        .map((e) => MultiSelectItem(e.id, e.name))
+                        .map((e) => MultiSelectItem(
+                            e.id,
+                            e.name.replaceFirst(e.name.characters.first,
+                                e.name.characters.first.toUpperCase())))
                         .toList(),
                     onConfirm: (values) {
                       selectedPeopleList = values.map((id) {

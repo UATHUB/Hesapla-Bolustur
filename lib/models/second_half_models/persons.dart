@@ -25,6 +25,7 @@ class Person {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'name': name,
       'includedExpenses': includedExpenses,
       'totalAmount': totalAmount,

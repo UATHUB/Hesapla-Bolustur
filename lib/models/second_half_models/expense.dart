@@ -13,4 +13,23 @@ class ActivityExpense {
   String name;
   double amount;
   List<Person> sharers;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'amount': amount,
+      'category': category,
+      'sharers': sharers.map((sharer) => sharer.toJson()).toList(),
+    };
+  }
+
+  factory ActivityExpense.fromJson(Map<String, dynamic> json) {
+    return ActivityExpense(
+      name: json['name'],
+      amount: json['amount'],
+      category: json['category'],
+      sharers: List<Person>.from(
+          json['sharers'].map((sharerJson) => Person.fromJson(sharerJson))),
+    );
+  }
 }

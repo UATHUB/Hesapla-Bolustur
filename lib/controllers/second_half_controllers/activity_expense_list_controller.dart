@@ -3,7 +3,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:self_test1/controllers/second_half_controllers/registered_persons_controller.dart';
 import 'package:self_test1/models/second_half_models/expense.dart';
 import 'package:self_test1/models/second_half_models/persons.dart';
-import 'package:self_test1/screens/second_half_screens/activity_expenses_screen.dart';
 
 final activityExpensesListBox = GetStorage('activityExpensesList');
 
@@ -65,20 +64,30 @@ class RegisteredActivityExpensesController extends GetxController {
   }
 
   void divideExpenses() {
-    List<ActivityExpense> allExpenses = registeredActivityExpenses;
+    RegisteredActivityExpensesController rae =
+        Get.put(RegisteredActivityExpensesController());
+    List<ActivityExpense> allExpenses = rae.getAllExpenses();
     RegisteredPersonsController rpc = Get.put(RegisteredPersonsController());
     rpc.resetAllData();
 
     for (var currentExpense in allExpenses) {
-      //TO DO:
-      List<Person> sharers = currentExpense.sharers;
+      print(currentExpense.name);
       double partOfEach = 0;
-      partOfEach = currentExpense.amount / sharers.length;
+      partOfEach = currentExpense.amount / currentExpense.sharers.length;
       print('Harcamaların kaç kişi tarafından bölüşüldüğü:');
-      print(sharers.length);
-      for (var person in sharers) {
-        person.includedExpenses.add(currentExpense.name);
-        person.totalAmount += partOfEach;
+      print(currentExpense.sharers.length);
+      for (var person in currentExpense.sharers) {
+        Person? existingPerson =
+            rpc.personsList.firstWhereOrNull((p) => p.name == person.name);
+        if (existingPerson != null) {
+          existingPerson.includedExpenses.add(currentExpense.name);
+          existingPerson.totalAmount += partOfEach;
+        } else {
+          print('kişi eşleşmedi');
+        }
+        print(
+            '${currentExpense.name} harcaması ${person.name} kişisine eklenmiş olmalı...');
+        print('_____________');
       }
     }
     print('TÜM KAYITLI HARCAMALAR:');

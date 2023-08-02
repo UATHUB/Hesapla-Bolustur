@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:self_test1/controllers/first_half_controllers/expenses_list_controller.dart';
+import 'package:self_test1/controllers/first_half_controllers/incomes_list_controller.dart';
 import 'package:self_test1/controllers/first_half_controllers/page_controller.dart';
 
 class SecondDrawer extends StatelessWidget {
@@ -126,7 +128,8 @@ class SecondDrawer extends StatelessWidget {
                   ),
             ),
             onTap: () {
-              //TODO
+              RegisteredIncomesController ri = Get.find();
+              ri.test();
             },
           ),
           const SizedBox(height: 25),
@@ -189,7 +192,8 @@ class SecondDrawer extends StatelessWidget {
                   ),
             ),
             onTap: () {
-              //TODO
+              RegisteredExpensesController re = Get.find();
+              re.test();
             },
           ),
           const SizedBox(height: 30),

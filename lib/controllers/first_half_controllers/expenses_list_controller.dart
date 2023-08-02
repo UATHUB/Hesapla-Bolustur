@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:self_test1/models/first_half_models/expense.dart';
@@ -50,5 +51,19 @@ class RegisteredExpensesController extends GetxController {
       dataList.removeWhere((data) => data['id'] == expenseId);
       expensesListBox.write('ExpensesList', dataList);
     }
+  }
+
+  void test() async {
+    for (var i = 0; i < 25; i++) {
+      registeredExpenses.add(Expense(
+          title: '$i. Harcama',
+          amount: i + 100,
+          date: DateTime.now(),
+          category: '${i % 20}. Kategori'));
+      print('$i. harcama eklendi');
+      await Future.delayed(Duration(milliseconds: 250));
+    }
+    saveExpenses(registeredExpenses);
+    Get.defaultDialog(content: Text('Bitti'));
   }
 }

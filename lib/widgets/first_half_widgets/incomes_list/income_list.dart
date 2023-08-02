@@ -18,20 +18,34 @@ class _IncomeListState extends State<IncomeList> {
   Widget build(BuildContext context) {
     RegisteredIncomesController ri = Get.find();
     List<Income> incomes = ri.registeredIncomes;
-    return ListView.builder(
+    return SliverList.builder(
       itemCount: incomes.length,
-      itemBuilder: (ctx, index) => Dismissible(
-        background: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.error.withOpacity(0.50),
-            borderRadius: BorderRadius.circular(10),
+      itemBuilder: (ctx, index) => InkWell(
+        onLongPress: () => Get.dialog(AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          shadowColor: Colors.black87.withAlpha(150),
+          content: Text(
+            'Bu Geliri Silmek İstediğinize Emin Misiniz ?',
+            softWrap: true,
+            style: const TextStyle().copyWith(
+                color: Theme.of(context).colorScheme.onSecondaryContainer,
+                fontSize: 16,
+                fontWeight: FontWeight.w500),
+            textWidthBasis: TextWidthBasis.parent,
           ),
-          margin: Theme.of(context).cardTheme.margin,
-        ),
-        key: ValueKey(incomes[index]),
-        onDismissed: (direction) {
-          widget.onRemoveIncome(incomes[index]);
-        },
+          actions: [
+            TextButton(
+              child: const Text('İptal'),
+              onPressed: () => Get.close(1),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  widget.onRemoveIncome(incomes[index]);
+                  Get.close(1);
+                },
+                child: const Text('Geliri Sil'))
+          ],
+        )),
         child: IncomeItem(incomes[index]),
       ),
     );

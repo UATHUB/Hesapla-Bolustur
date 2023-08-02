@@ -18,22 +18,53 @@ class _ExpensesListState extends State<ExpensesList> {
   Widget build(BuildContext context) {
     RegisteredExpensesController re = Get.find();
     List<Expense> expenses = re.registeredExpenses;
-    return ListView.builder(
-      itemCount: expenses.length,
-      itemBuilder: (ctx, index) => Dismissible(
-        background: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.error.withOpacity(0.50),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          margin: Theme.of(context).cardTheme.margin,
-        ),
-        key: ValueKey(expenses[index]),
-        onDismissed: (direction) {
-          widget.onRemoveExpense(expenses[index]);
-        },
-        child: ExpenseItem(expenses[index]),
-      ),
-    );
+    return SliverList.builder(
+        itemCount: expenses.length,
+        itemBuilder: (ctx, index) => InkWell(
+              onLongPress: () => Get.dialog(AlertDialog(
+                backgroundColor:
+                    Theme.of(context).colorScheme.secondaryContainer,
+                shadowColor: Colors.black87.withAlpha(150),
+                content: Text(
+                  'Bu Harcamayı Silmek İstediğinize Emin Misiniz ?',
+                  softWrap: true,
+                  style: const TextStyle().copyWith(
+                      color: Theme.of(context).colorScheme.onSecondaryContainer,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
+                  textWidthBasis: TextWidthBasis.parent,
+                ),
+                actions: [
+                  TextButton(
+                    child: const Text('İptal'),
+                    onPressed: () => Get.close(1),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        widget.onRemoveExpense(expenses[index]);
+                        Get.close(1);
+                      },
+                      child: const Text('Harcamayı Sil'))
+                ],
+              )),
+              child: ExpenseItem(expenses[index]),
+            )
+
+        // Dismissible(
+        //   background: Container(
+        //     decoration: BoxDecoration(
+        //       color: Theme.of(context).colorScheme.error.withOpacity(0.50),
+        //       borderRadius: BorderRadius.circular(10),
+        //     ),
+        //     margin: Theme.of(context).cardTheme.margin,
+        //   ),
+        //   direction: DismissDirection.endToStart,
+        //   key: ValueKey(expenses[index]),
+        //   onDismissed: (direction) {
+        //     widget.onRemoveExpense(expenses[index]);
+        //   },
+        //   child: ExpenseItem(expenses[index]),
+        // ),
+        );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -87,30 +88,90 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       mainContent = Scaffold(
         floatingActionButton: FloatingActionButton(
             onPressed: _openAddExpenseOverlay, child: const Icon(Icons.add)),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            const SizedBox(height: 30),
-            PieChart(
-                dataMap: mapRegisteredExpenses(registeredExpenses),
-                chartRadius: 350,
-                chartValuesOptions: ChartValuesOptions(
-                    showChartValuesInPercentage: true,
-                    showChartValueBackground: false,
-                    chartValueStyle: const TextStyle().copyWith(
-                        color:
-                            Theme.of(context).colorScheme.secondaryContainer)),
-                legendOptions: LegendOptions(
-                    showLegendsInRow: true,
-                    legendPosition: LegendPosition.bottom,
-                    legendTextStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface))),
-            const SizedBox(height: 5),
-            Expanded(
-              child: ExpensesList(
-                onRemoveExpense: _removeExpense,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: const Text('Harcamalar'),
+              expandedHeight: 450,
+              pinned: true,
+              floating: false,
+              primary: true,
+              stretch: true,
+              automaticallyImplyLeading: false,
+              actions: [
+                IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.restore))
+              ],
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10))),
+              flexibleSpace: FlexibleSpaceBar(
+                collapseMode: CollapseMode.parallax,
+                background: CarouselSlider(
+                  options: CarouselOptions(
+                    viewportFraction: 0.9,
+                    enlargeCenterPage: true,
+                    initialPage: 0,
+                    height: 350,
+                    enlargeFactor: 1.20,
+                    enableInfiniteScroll: false,
+                  ),
+                  items: [
+                    Column(
+                      children: [
+                        PieChart(
+                          dataMap: mapRegisteredExpenses(registeredExpenses),
+                          chartRadius: 450,
+                          chartValuesOptions: ChartValuesOptions(
+                            showChartValuesInPercentage: true,
+                            showChartValueBackground: false,
+                            chartValueStyle: const TextStyle().copyWith(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer),
+                          ),
+                          legendOptions: LegendOptions(
+                            showLegends: false,
+                            showLegendsInRow: true,
+                            legendPosition: LegendPosition.bottom,
+                            legendTextStyle: TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface),
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Kategori İsimlerini Görmek İçin Kaydırınız',
+                              style: const TextStyle().copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer),
+                            ),
+                            const Icon(Icons.chevron_right_sharp)
+                          ],
+                        )
+                      ],
+                    ),
+                    PieChart(
+                      dataMap: mapRegisteredExpenses(registeredExpenses),
+                      chartRadius: 0,
+                      chartValuesOptions:
+                          const ChartValuesOptions(showChartValues: false),
+                      legendOptions: LegendOptions(
+                        showLegendsInRow: true,
+                        legendPosition: LegendPosition.top,
+                        legendTextStyle: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
+            ExpensesList(onRemoveExpense: _removeExpense),
           ],
         ),
       );

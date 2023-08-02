@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:self_test1/controllers/first_half_controllers/incomes_list_controller.dart';
@@ -45,7 +46,7 @@ class _ExpensesScreenState extends State<IncomesScreen> {
       ri.saveIncomes(registeredIncomes);
     });
     Get.closeAllSnackbars();
-    Get.snackbar('Başarılı', 'Harcama Silindi',
+    Get.snackbar('Başarılı', 'Gelir Silindi',
         snackPosition: SnackPosition.TOP,
         mainButton: TextButton(
           child: const Text('Geri Al'),
@@ -87,32 +88,119 @@ class _ExpensesScreenState extends State<IncomesScreen> {
       mainContent = Scaffold(
         floatingActionButton: FloatingActionButton(
             onPressed: _openAddIncomeOverlay, child: const Icon(Icons.add)),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            const SizedBox(height: 50),
-            PieChart(
-                dataMap: mapRegisteredExpenses(registeredIncomes),
-                chartRadius: 300,
-                chartValuesOptions: ChartValuesOptions(
-                    showChartValuesInPercentage: true,
-                    showChartValueBackground: false,
-                    chartValueStyle: const TextStyle().copyWith(
-                        color:
-                            Theme.of(context).colorScheme.secondaryContainer)),
-                legendOptions: LegendOptions(
-                    showLegendsInRow: true,
-                    legendPosition: LegendPosition.bottom,
-                    legendTextStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface))),
-            const SizedBox(height: 5),
-            Expanded(
-              child: IncomeList(
-                onRemoveIncome: _removeIncome,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: const Text('Gelirler'),
+              expandedHeight: 450,
+              pinned: true,
+              floating: false,
+              primary: true,
+              stretch: true,
+              automaticallyImplyLeading: false,
+              actions: [
+                IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.restore))
+              ],
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10))),
+              flexibleSpace: FlexibleSpaceBar(
+                collapseMode: CollapseMode.parallax,
+                background: CarouselSlider(
+                  options: CarouselOptions(
+                    viewportFraction: 0.9,
+                    enlargeCenterPage: true,
+                    initialPage: 0,
+                    height: 350,
+                    enlargeFactor: 1.20,
+                    enableInfiniteScroll: false,
+                  ),
+                  items: [
+                    Column(
+                      children: [
+                        PieChart(
+                          dataMap: mapRegisteredExpenses(registeredIncomes),
+                          chartRadius: 450,
+                          chartValuesOptions: ChartValuesOptions(
+                            showChartValuesInPercentage: true,
+                            showChartValueBackground: false,
+                            chartValueStyle: const TextStyle().copyWith(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer),
+                          ),
+                          legendOptions: LegendOptions(
+                            showLegends: false,
+                            showLegendsInRow: true,
+                            legendPosition: LegendPosition.bottom,
+                            legendTextStyle: TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface),
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Kategori İsimlerini Görmek İçin Kaydırınız',
+                              style: const TextStyle().copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer),
+                            ),
+                            const Icon(Icons.chevron_right_sharp)
+                          ],
+                        )
+                      ],
+                    ),
+                    PieChart(
+                      dataMap: mapRegisteredExpenses(registeredIncomes),
+                      chartRadius: 0,
+                      chartValuesOptions:
+                          const ChartValuesOptions(showChartValues: false),
+                      legendOptions: LegendOptions(
+                        showLegendsInRow: true,
+                        legendPosition: LegendPosition.top,
+                        legendTextStyle: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
+            IncomeList(onRemoveIncome: _removeIncome),
           ],
         ),
+
+        // Column(
+        //   mainAxisSize: MainAxisSize.max,
+        //   children: [
+        //     const SizedBox(height: 50),
+        //     PieChart(
+        //         dataMap: mapRegisteredExpenses(registeredIncomes),
+        //         chartRadius: 300,
+        //         chartValuesOptions: ChartValuesOptions(
+        //             showChartValuesInPercentage: true,
+        //             showChartValueBackground: false,
+        //             chartValueStyle: const TextStyle().copyWith(
+        //                 color:
+        //                     Theme.of(context).colorScheme.secondaryContainer)),
+        //         legendOptions: LegendOptions(
+        //             showLegendsInRow: true,
+        //             legendPosition: LegendPosition.bottom,
+        //             legendTextStyle: TextStyle(
+        //                 color: Theme.of(context).colorScheme.onSurface))),
+        //     const SizedBox(height: 5),
+        //     Expanded(
+        //       child: IncomeList(
+        //         onRemoveIncome: _removeIncome,
+        //       ),
+        //     ),
+        //   ],
+        // ),
       );
     }
     return mainContent;
